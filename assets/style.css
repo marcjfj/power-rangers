@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css?family=Khand&display=swap');
+
+*{
+    box-sizing: border-box;
+    transition: transform .3s ease;
+    font-family: 'Khand', sans-serif;
+    color: rgb(58, 58, 58);
+}
+
+body{
+    margin: 0;
+    background: #333;
+}
+
+.character-pick{
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: rgb(252,252,252);
+    background: linear-gradient(163deg, rgba(252,252,252,1) 0%, rgba(201,201,201,1) 100%);
+}
+.character-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.character-card{
+    /* border: 1px solid #000; */
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.288);
+    margin: 10px;
+    padding: 10px;
+    flex-flow: 1;
+    cursor: pointer;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.384);
+    transition: all .2s;
+    text-align: center;
+}
+.character-card img{
+    height: 200px;
+}
+.character-card p{
+    margin: 0;
+
+}
+.character-card p span:nth-child(2){
+    font-weight: 700;
+}
+.character-card:hover{
+    background: rgb(255, 255, 255);
+}
+
+.game{
+    background: #EEE;
+    display: flex;
+    position: fixed;   
+    justify-content: stretch;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+
+}
+.left, .right{
+    /* border: 3px solid #333; */
+    box-shadow: inset 0px 2px 5px 0px rgba(0, 0, 0, 0.26);
+    border-radius: 5px;
+    height: calc(100% - 20px);
+    flex-basis: 50%;
+    position: relative;
+    margin: 10px;
+    background: rgb(233, 233, 233);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* overflow: hidden; */
+}
+
+.active{
+    background: #FFF;
+    z-index: 50;
+}
+
+.player-name, .opponent-name{
+    text-align: center;
+}
+.player-image, .opponent-image{
+    margin: auto;
+}
+.player-image img, .opponent-image img{
+    height: 40vh;
+    display: block;
+    margin: auto;
+    transition: all .5s;
+    z-index: 100;
+    position: relative;
+}
+.opponent-image.attack{
+    transform: translateX(calc(-50vw + 20px));
+}
+.player-image.attack{
+    transform: translateX(calc(50vw - 20px));
+}
+.dead{
+    transform-origin: 50% 100%;
+    transform: rotate(90deg);
+}
+.health{
+    width: calc(100% - 40px);
+    margin: 0px auto;
+}
+.health-bar{
+    height: 10px;
+    background: rgb(182, 182, 182);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.288);
+}
+.health-bar-inner{
+    background: rgb(132,255,60);
+    background: linear-gradient(356deg, rgba(132,255,60,1) 0%, rgba(209,247,185,1) 100%);
+    /* width: 60%; */
+    height: 100%;
+    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.288), 0px 2px 3px 0px rgba(0, 0, 0, 0.288);
+
+}
+.damage-display{
+    color: rgb(212, 45, 45);
+    font-size: 60px;
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    opacity: 0;
+    transform: translateX(100px) scale(.2);
+    transition: all .5s;
+}
+.right .damage-display{
+    left: auto;
+    right: 10%;
+    transform: translateX(-100px) scale(.2);
+}
+
+.hit, .right .damage-display.hit{
+    opacity: 1;
+    transform: translateX(0px) scale(1.2);
+}
+.controls{
+    background: rgba(0, 0, 0, 0.425);
+    padding: 20px;
+    margin-top: auto;
+    min-height: 100px;
+}
+
+.controls button{
+    background: rgb(236, 236, 236);
+    border: none;
+    border-radius: 3px;
+    font-size: 1.2em;
+    padding: 5px 10px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.288);
+}
+
+.pick-opponent{
+    position: fixed;
+    width: calc(50% - 20px);
+    height: 100%;
+    background: #EEE;
+    top: 0px;
+    text-align: center;
+    padding: 10px;
+    
+}
+.opponent-list{
+    display: flex;
+    justify-content: center;
+}
+.opponent-card{
+    padding: 10px;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.288);
+    border-radius: 3px;
+    margin-bottom: 10px;
+    
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.384);
+    transition: all .2s;
+}
+.opponent-card:hover{
+    background: #FFF;
+    cursor: pointer;
+}
+.opponent-card img{
+    height: 75px;
+}
+.opponent-card p{
+    margin: 0;
+    padding: 2px;
+}
+.opponent-card p span:nth-child(2){
+    font-weight: 700;
+}
+
+.end-round{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(78, 0, 0, 0.603);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.win{
+    background: rgba(6, 70, 6, 0.521);
+}
+.end-round-title{
+    color: #FFF;
+    font-size: 6em;
+}
+.end-round-button{
+    background: #FFF;
+    border-radius: 5px;
+    font-size: 2em;
+    border: none;
+    padding: 10px 20px;
+}
+.hidden{
+    transform: scaleY(0);
+}
+
